@@ -91,11 +91,11 @@ const GRAVITY = {
   13: 4,
   14: 4,
   15: 4,
-  16: 3,
-  17: 3,
-  18: 3,
-  19: 2,
-  29: 1,
+  16: 4,
+  17: 4,
+  18: 4,
+  19: 4,
+  29: 4,
 };
 
 export function CalculatePushdownPoints(cellsSoftDropped) {
@@ -109,9 +109,9 @@ export function GetGravity(levelNum) {
   if (levelNum <= 18) {
     return GRAVITY[levelNum];
   } else if (levelNum < 29) {
-    return 2;
+    return 4;
   } else {
-    return 1;
+    return 4;
   }
 }
 
@@ -133,6 +133,7 @@ export const DASSpeed = Object.freeze({
   MEDIUM: "medium",
   FAST: "fast",
   FASTDAS: "Fast DAS",
+  FASTERDAS: "Faster DAS",
 });
 
 export const DASBehavior = Object.freeze({

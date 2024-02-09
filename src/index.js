@@ -12,6 +12,7 @@ import {
   CalculatePushdownPoints,
   StartingBoardType,
 } from "./constants.js";
+import { soundEffects, Sounds } from "./sounds.js";
 import { Piece } from "./piece.js";
 import { InputManager } from "./input_manager.js";
 import { BoardEditManager } from "./board_edit_manager.js";
@@ -196,6 +197,11 @@ function getLinesToTransition(levelNum) {
 
 function removeFullRows() {
   const numLinesCleared = m_linesPendingClear.length;
+  if(numLinesCleard >= 4) {
+    Sounds.playSound(soundEffects.clear4);
+  } else {
+    Sounds.playSound(soundEffects.lineClear);
+  }
   for (const r of m_linesPendingClear) {
     m_board.splice(r, 1);
     m_board.splice(0, 0, []);

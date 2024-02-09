@@ -12,6 +12,7 @@ import {
   BOARD_WIDTH,
   SquareState,
 } from "./constants.js";
+import { soundEffects, Sounds } from "./sounds.js";
 import { GetLevel, GetCurrentPiece, calcParity } from "./index.js";
 const GameSettings = require("./game_settings_manager");
 
@@ -29,6 +30,12 @@ Canvas.prototype.drawLineClears = function (rowsArray, frameNum) {
   if (frameNum >= 15) {
     // animation already done
     return;
+  }
+  const numLinesCleared = rowsArray.length;
+  if(numLinesCleared >= 4) {
+    Sounds.playSound(soundEffects.lineFall);
+  } else {
+    Sounds.playSound(soundEffects.lineFall);
   }
   const rightColToClear = 5 + Math.floor(frameNum / 3);
   const leftColToClear = 9 - rightColToClear;
