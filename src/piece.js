@@ -1,6 +1,8 @@
 import { NUM_ROW, NUM_COLUMN, VACANT, COLOR_PALETTE } from "./constants.js";
-import { soundEffects, Sounds } from "./sounds.js";
+import { createSounds, playSoundFromArray } from "./sounds.js";
 import { TriggerGameOver } from "."
+export let audioIndex = 0;
+createSounds("./src/sounds/NES_move.wav");
 
 /** 
  * Piece object, responsible for moving and rotating itself within the board.
@@ -61,6 +63,7 @@ Piece.prototype.moveRight = function () {
     } else {
         // No collision, move the piece
         this.x++;
+        playSoundFromArray(audioIndex, "./src/sounds/NES_move.wav");
         return true;
     }
 };
@@ -74,7 +77,7 @@ Piece.prototype.moveLeft = function () {
     } else {
         // No collision, move the piece
         this.x--;
-        Sounds.playSound(soundEffects.blockMove);
+        playSoundFromArray(audioIndex, "./src/sounds/NES_move.wav");
         return true;
     }
 }
