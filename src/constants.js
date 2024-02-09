@@ -134,6 +134,7 @@ export const DASSpeed = Object.freeze({
   FAST: "fast",
   FASTDAS: "Fast DAS",
   FASTERDAS: "Faster DAS",
+  TWENTYFIVEHZDAS: "25 Hz DAS",
 });
 
 export const DASBehavior = Object.freeze({
