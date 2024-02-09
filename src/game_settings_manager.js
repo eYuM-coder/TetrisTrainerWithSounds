@@ -102,15 +102,15 @@ export function getDASTriggerThreshold() {
     case DASSpeed.STANDARD:
       ARR = 6;
       break;
-    case DASSpeed.FAST:
-    case DASSpeed.FASTDAS:
-      ARR = 4;
-      break;
     case DASSpeed.SLOW_MEDIUM:
     case DASSpeed.MEDIUM:
+      ARR = 5;
+      break;
+    case DASSpeed.FAST:
+    case DASSpeed.FASTDAS:
     case DASSpeed.FASTERDAS:
     case DASSpeed.TWENTYFIVEHZDAS:
-      ARR = 5;
+      ARR = 4;
       break;
     default:
       throw new Error("Unknown DAS speed: " + dasSpeed);
