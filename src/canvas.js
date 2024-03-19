@@ -12,7 +12,7 @@ import {
   BOARD_WIDTH,
   SquareState,
 } from "./constants.js";
-import { soundEffects, Sounds } from "./sounds.js";
+import { playSound } from "./sounds.js";
 import { GetLevel, GetCurrentPiece, calcParity } from "./index.js";
 const GameSettings = require("./game_settings_manager");
 
@@ -27,15 +27,17 @@ export function Canvas(board) {
 /** Runs an animation to clear the lines passed in in an array.
  * Doesn't affect the actual board, those updates come at the end of the animation. */
 Canvas.prototype.drawLineClears = function (rowsArray, frameNum) {
+  const numLinesCleared = rowsArray.length;
+  if (frameNum <= 1) {
+    if(numLinesCleared >= 4) {
+      playSound("./sounds/NES_linefall.mp3");
+    } else {
+      playSound("./sounds/NES_linefall.mp3");
+    }
+  }
   if (frameNum >= 15) {
     // animation already done
     return;
-  }
-  const numLinesCleared = rowsArray.length;
-  if(numLinesCleared >= 4) {
-    Sounds.playSound(soundEffects.lineFall);
-  } else {
-    Sounds.playSound(soundEffects.lineFall);
   }
   const rightColToClear = 5 + Math.floor(frameNum / 3);
   const leftColToClear = 9 - rightColToClear;

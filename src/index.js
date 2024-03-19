@@ -12,7 +12,7 @@ import {
   CalculatePushdownPoints,
   StartingBoardType,
 } from "./constants.js";
-import { soundEffects, Sounds } from "./sounds.js";
+import { playSound } from "./sounds.js";
 import { Piece } from "./piece.js";
 import { InputManager } from "./input_manager.js";
 import { BoardEditManager } from "./board_edit_manager.js";
@@ -34,7 +34,8 @@ import {
 import { PIECE_LOOKUP } from "./tetrominoes.js";
 const GameSettings = require("./game_settings_manager");
 const GameSettingsUi = require("./game_settings_ui_manager");
-
+const NES_levelup = require("./sounds/NES_levelup.wav");
+const NES_lock = require("./sounds/NES_lock.wav");
 const headerTextElement = document.getElementById("header-text");
 const preGameConfigDiv = document.getElementById("pre-game-config");
 const randomBoardResetButton = document.getElementById(
@@ -197,11 +198,6 @@ function getLinesToTransition(levelNum) {
 
 function removeFullRows() {
   const numLinesCleared = m_linesPendingClear.length;
-  if(numLinesCleard >= 4) {
-    Sounds.playSound(soundEffects.clear4);
-  } else {
-    Sounds.playSound(soundEffects.lineClear);
-  }
   for (const r of m_linesPendingClear) {
     m_board.splice(r, 1);
     m_board.splice(0, 0, []);
@@ -229,7 +225,7 @@ function removeFullRows() {
       m_lines >= m_nextTransitionLineCount
     ) {
       m_level += 1;
-
+      playSound(NES_levelup);
       m_nextTransitionLineCount += 10;
     }
 
@@ -625,6 +621,7 @@ export function G_MoveCurrentPieceDown() {
 function lockPiece() {
   const lockHeight = m_currentPiece.getHeightFromBottom();
   m_currentPiece.lock();
+  playSound(NES_lock);
   m_inputManager.onPieceLock();
   m_canvas.drawBoard();
 

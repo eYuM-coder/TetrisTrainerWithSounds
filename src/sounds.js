@@ -1,7 +1,9 @@
 export function playSound(sound) {
     let audio = new Audio(sound);
     audio.currentTime = 0;
-    audio.play();
+    audio.play().then(() => {
+        audio.remove();
+    });
 }
 
 export function createSounds(sound) {
