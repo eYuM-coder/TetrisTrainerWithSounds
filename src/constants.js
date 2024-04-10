@@ -72,6 +72,8 @@ export const REWARDS = {
   2: 100,
   3: 300,
   4: 1200,
+  5: 2000,
+  6: 3400,
 };
 // How many frames it takes to drop one square
 const GRAVITY = {
@@ -91,11 +93,11 @@ const GRAVITY = {
   13: 4,
   14: 4,
   15: 4,
-  16: 4,
-  17: 4,
-  18: 4,
-  19: 4,
-  29: 4,
+  16: 3,
+  17: 3,
+  18: 3,
+  19: 3,
+  29: 3,
 };
 
 export function CalculatePushdownPoints(cellsSoftDropped) {
@@ -109,9 +111,9 @@ export function GetGravity(levelNum) {
   if (levelNum <= 18) {
     return GRAVITY[levelNum];
   } else if (levelNum < 29) {
-    return 4;
+    return 3;
   } else {
-    return 4;
+    return 3;
   }
 }
 
