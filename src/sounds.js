@@ -6,8 +6,8 @@ export function playSound(sound) {
     });
 }
 
-export function createSounds(sound) {
-    let audioArray = new Array(10);
+export function createSounds(sound, length) {
+    let audioArray = new Array(length);
 
     for(let i = 0; i < audioArray.length; i++) {
         audioArray[i] = new Audio(sound);

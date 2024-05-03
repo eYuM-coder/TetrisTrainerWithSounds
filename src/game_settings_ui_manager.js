@@ -18,6 +18,7 @@ const transition10Checkbox = document.getElementById("transition-10-checkbox");
 const pieceSequenceText = document.getElementById("piece-sequence");
 const levelSelectElement = document.getElementById("level-select");
 const fullscreenCheckbox = document.getElementById("fullscreen-checkbox");
+const disableSoundsCheckbox = document.getElementById("disable-sounds-checkbox");
 
 const playerSettings = getUserPreferencesFromCookie();
 
@@ -30,9 +31,10 @@ const DAS_SPEED_LIST = [
   DASSpeed.SLOW_MEDIUM,
   DASSpeed.MEDIUM,
   DASSpeed.FAST,
-  DASSpeed.FASTDAS,
-  DASSpeed.FASTERDAS,
-  DASSpeed.TWENTYFIVEHZDAS,
+  DASSpeed.FASTER,
+  DASSpeed.ROLLING,
+  DASSpeed.TURBO,
+  DASSpeed.HYPER,
 ];
 
 /* List of DAS charging behaviors in order that they're listed in the UI dropdown.
@@ -128,6 +130,11 @@ function addOnChangeListeners() {
     });
   }
 
+  disableSoundsCheckbox.addEventListener("change", (e) => {
+    playerSettings["DisableSoundsEnabled"] = getDisableSoundsEnabled();
+    saveUserPreferencesToCookie();
+  });
+
   // Also update the level select buttons
   levelSelectElement.addEventListener("change", (e) => {
     onLevelChanged();
@@ -169,6 +176,9 @@ function setSetting(settingName, value) {
     case "ParityHintsEnabled":
       parityHintsCheckbox.checked = value;
       break;
+    case "DisableSoundsEnabled":
+      disableSoundsCheckbox.checked = value;
+      break;
     case "PieceSequence":
       pieceSequenceText.value = value;
       break;
@@ -206,6 +216,10 @@ export function getDiggingHintsEnabled() {
 
 export function getParityHintsEnabled() {
   return parityHintsCheckbox.checked;
+}
+
+export function getDisableSoundsEnabled() {
+  return disableSoundsCheckbox.checked;
 }
 
 export function getGameSpeedMultiplier() {
@@ -248,6 +262,7 @@ export function loadPreset(presetObj) {
     ["DiggingHintsEnabled", diggingHintsCheckbox],
     ["GameSpeedMultiplier", gameSpeedDropdown],
     ["ParityHintsEnabled", parityHintsCheckbox],
+    ["DisableSoundsEnabled", disableSoundsCheckbox],
     ["PieceSequence", pieceSequenceText],
     ["Transition10Lines", transition10Checkbox],
     ["StartingBoardType", startingBoardDropdown],

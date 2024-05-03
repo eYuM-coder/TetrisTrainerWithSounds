@@ -12,7 +12,7 @@ import {
   CalculatePushdownPoints,
   StartingBoardType,
 } from "./constants.js";
-import { playSound } from "./sounds.js";
+import { playSound, playSoundFromArray } from "./sounds.js";
 import { Piece } from "./piece.js";
 import { InputManager } from "./input_manager.js";
 import { BoardEditManager } from "./board_edit_manager.js";
@@ -43,6 +43,8 @@ const randomBoardResetButton = document.getElementById(
 );
 const mainCanvas = document.getElementById("main-canvas");
 const centerPanel = document.getElementById("center-panel");
+let audioArray = createSounds(NES_lock, 4);
+let audioIndex = 0;
 
 // Set up system theme detection
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
@@ -102,6 +104,7 @@ let m_monitorStatus = null;
 let m_totalMsElapsed;
 let m_numFrames;
 let m_maxMsElapsed;
+let m_soundsDisabled = false;
 
 // Exported methods that allow other classes to access the variables in this file
 
@@ -120,6 +123,10 @@ export const GetLines = () => {
 export const GetIsPaused = () => {
   return m_isPaused;
 };
+
+export const GetIsSoundsDisabled = () => {
+  return m_soundsDisabled;
+}
 
 export const G_Restart = function () {
   if (gameStateIsInGame() || m_gameState == GameState.GAME_OVER) {
@@ -225,7 +232,9 @@ function removeFullRows() {
       m_lines >= m_nextTransitionLineCount
     ) {
       m_level += 1;
-      playSound(NES_levelup);
+      if(disableSounds() === false) {
+        playSound(NES_levelup);
+      }
       m_nextTransitionLineCount += 10;
     }
 
@@ -550,6 +559,12 @@ export function calcParity(startCol, endCol) {
   return Math.abs(parity);
 }
 
+export function disableSounds() {
+  let disabled = GameSettings.shouldDisableSounds();
+  m_soundsDisabled = disabled;
+  return m_soundsDisabled;
+}
+
 // Does nothing at the moment, I don't like how parity stats turned out
 function refreshStats() {
   // const leftParity = calcParity(0, 5);
@@ -599,7 +614,6 @@ export function G_MovePieceRight() {
   m_canvas.unDrawCurrentPiece();
   const didMove = m_currentPiece.moveRight();
   m_canvas.drawCurrentPiece();
-  m_canvas.playSound();
   return didMove;
 }
 
@@ -621,7 +635,11 @@ export function G_MoveCurrentPieceDown() {
 function lockPiece() {
   const lockHeight = m_currentPiece.getHeightFromBottom();
   m_currentPiece.lock();
-  playSound(NES_lock);
+  playSoundFromArray(audioIndex, audioArray);
+  audioIndex++;
+  if(audioIndex >= audioArray.length) {
+    audioIndex = 0;
+  }
   m_inputManager.onPieceLock();
   m_canvas.drawBoard();
 

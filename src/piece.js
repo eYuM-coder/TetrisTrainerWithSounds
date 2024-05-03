@@ -1,12 +1,12 @@
 import { NUM_ROW, NUM_COLUMN, VACANT, COLOR_PALETTE } from "./constants.js";
 import { createSounds, playSoundFromArray } from "./sounds.js";
-import { TriggerGameOver } from "."
-const NES_move = require("./sounds/NES_move.wav");
-const NES_rotate = require("./sounds/NES_rotate.mp3");
-export let audioArray = createSounds(NES_move);
-export let audioArray2 = createSounds(NES_rotate);
-export let audioIndex = 0;
-export let audioIndex2 = 0;
+import { TriggerGameOver, disableSounds } from "."
+import NES_move from "./sounds/NES_move.wav";
+import NES_rotate from "./sounds/NES_rotate.mp3";
+let audioArray = createSounds(NES_move);
+let audioArray2 = createSounds(NES_rotate);
+let audioIndex = 0;
+let audioIndex2 = 0;
 
 /** 
  * Piece object, responsible for moving and rotating itself within the board.
@@ -67,10 +67,12 @@ Piece.prototype.moveRight = function () {
     } else {
         // No collision, move the piece
         this.x++;
-        playSoundFromArray(audioIndex, audioArray);
-        audioIndex++;
-        if (audioIndex >= audioArray.length - 1) {
-            audioIndex = 0;
+        if (disableSounds() === false) {
+            playSoundFromArray(audioIndex, audioArray);
+            audioIndex++;
+            if (audioIndex >= audioArray.length - 1) {
+                audioIndex = 0;
+            }
         }
         return true;
     }
@@ -85,10 +87,12 @@ Piece.prototype.moveLeft = function () {
     } else {
         // No collision, move the piece
         this.x--;
-        playSoundFromArray(audioIndex, audioArray);
-        audioIndex++;
-        if (audioIndex >= audioArray.length - 1) {
-            audioIndex = 0;
+        if (disableSounds() === false) {
+            playSoundFromArray(audioIndex, audioArray);
+            audioIndex++;
+            if (audioIndex >= audioArray.length - 1) {
+                audioIndex = 0;
+            }
         }
         return true;
     }
@@ -105,7 +109,9 @@ Piece.prototype.rotate = function (isClockwise) {
     // Rotate as long as the new orientation doesn't collide with the board
     if (!this.collision(0, 0, nextPattern)) {
         this.rotationIndex = nextIndex;
-        playSoundFromArray(audioIndex2, audioArray2);
+        if (disableSounds() === false) {
+            playSoundFromArray(audioIndex2, audioArray2);
+        }
         this.activeTetromino = this.rotationList[this.rotationIndex];
     }
 };

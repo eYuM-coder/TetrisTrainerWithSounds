@@ -26,6 +26,10 @@ export function shouldShowParityHints() {
   return Ui.getParityHintsEnabled();
 }
 
+export function shouldDisableSounds() {
+  return Ui.getDisabledSoundsEnabled();
+}
+
 export function getGameSpeedMultiplier() {
   return Ui.getGameSpeedMultiplier();
 }
@@ -107,10 +111,17 @@ export function getDASTriggerThreshold() {
       ARR = 5;
       break;
     case DASSpeed.FAST:
-    case DASSpeed.FASTDAS:
-    case DASSpeed.FASTERDAS:
-    case DASSpeed.TWENTYFIVEHZDAS:
       ARR = 4;
+      break;
+    case DASSpeed.FASTER:
+    case DASSpeed.ROLLING:
+      ARR = 3;
+      break;
+    case DASSpeed.TURBO:
+      ARR = 2;
+      break;
+    case DASSpeed.HYPER:
+      ARR = 1;
       break;
     default:
       throw new Error("Unknown DAS speed: " + dasSpeed);

@@ -28,11 +28,13 @@ export function Canvas(board) {
  * Doesn't affect the actual board, those updates come at the end of the animation. */
 Canvas.prototype.drawLineClears = function (rowsArray, frameNum) {
   const numLinesCleared = rowsArray.length;
-  if (frameNum <= 1) {
-    if(numLinesCleared >= 4) {
-      playSound("./sounds/NES_linefall.mp3");
-    } else {
-      playSound("./sounds/NES_linefall.mp3");
+  if (disableSounds() === false) {
+    if (frameNum <= 1) {
+      if(numLinesCleared >= 4) {
+        playSound("./sounds/NES_linefall.mp3");
+      } else {
+        playSound("./sounds/NES_clear4.mp3");
+      }
     }
   }
   if (frameNum >= 15) {
