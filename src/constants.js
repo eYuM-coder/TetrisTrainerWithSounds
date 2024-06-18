@@ -96,8 +96,8 @@ const GRAVITY = {
   16: 3,
   17: 3,
   18: 3,
-  19: 3,
-  29: 3,
+  19: 2,
+  29: 2,
 };
 
 export function CalculatePushdownPoints(cellsSoftDropped) {
@@ -111,9 +111,9 @@ export function GetGravity(levelNum) {
   if (levelNum <= 18) {
     return GRAVITY[levelNum];
   } else if (levelNum < 29) {
-    return 3;
+    return 2;
   } else {
-    return 3;
+    return 2;
   }
 }
 
