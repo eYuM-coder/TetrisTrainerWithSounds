@@ -43,8 +43,18 @@ const randomBoardResetButton = document.getElementById(
 );
 const mainCanvas = document.getElementById("main-canvas");
 const centerPanel = document.getElementById("center-panel");
-let audioArray = createSounds(NES_lock, 4);
-let audioIndex = 0;
+import { Audio } from "./audio.js";
+
+const audio = Audio().getInstance();
+
+async function initAudio() {
+  audio.setSFXVolume(0.5);
+  audio.setMusicVolume(0.5);
+
+  await audio.loadSFX('piece_drop', 'sounds/NES_lock.wav');
+  await audio.loadSFX('level_up', 'sounds/NES_levelup.wav');
+}
+initAudio();
 
 // Set up system theme detection
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
