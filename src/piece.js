@@ -1,12 +1,19 @@
 import { NUM_ROW, NUM_COLUMN, VACANT, COLOR_PALETTE } from "./constants.js";
 import { createSounds, playSoundFromArray } from "./sounds.js";
 import { TriggerGameOver, disableSounds } from "."
-import NES_move from "./sounds/NES_move.wav";
-import NES_rotate from "./sounds/NES_rotate.mp3";
-let audioArray = createSounds(NES_move);
-let audioArray2 = createSounds(NES_rotate);
-let audioIndex = 0;
-let audioIndex2 = 0;
+import NES_move from "../docs/sounds/NES_move.wav";
+import NES_rotate from "../docs/sounds/NES_rotate.wav";
+import { Audio } from "./audio.js";
+
+const audio = Audio().getInstance();
+
+async function initAudio() {
+    audio.setSFXVolume(0.5);
+    audio.setMusicVolume(0.5);
+
+    audio.loadSFX('piece_move', 'sounds/NES_move.wav');
+    audio.loadSFX('piece_rotate', 'sounds/NES_rotate.wav');
+}
 
 /** 
  * Piece object, responsible for moving and rotating itself within the board.
@@ -68,11 +75,7 @@ Piece.prototype.moveRight = function () {
         // No collision, move the piece
         this.x++;
         if (disableSounds() === false) {
-            playSoundFromArray(audioIndex, audioArray);
-            audioIndex++;
-            if (audioIndex >= audioArray.length - 1) {
-                audioIndex = 0;
-            }
+            audio.playSFX('piece_move');
         }
         return true;
     }
@@ -88,11 +91,7 @@ Piece.prototype.moveLeft = function () {
         // No collision, move the piece
         this.x--;
         if (disableSounds() === false) {
-            playSoundFromArray(audioIndex, audioArray);
-            audioIndex++;
-            if (audioIndex >= audioArray.length - 1) {
-                audioIndex = 0;
-            }
+            audio.playSFX('piece_move');
         }
         return true;
     }
@@ -110,7 +109,7 @@ Piece.prototype.rotate = function (isClockwise) {
     if (!this.collision(0, 0, nextPattern)) {
         this.rotationIndex = nextIndex;
         if (disableSounds() === false) {
-            playSoundFromArray(audioIndex2, audioArray2);
+            audio.playSFX('piece_rotate');
         }
         this.activeTetromino = this.rotationList[this.rotationIndex];
     }

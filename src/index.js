@@ -243,7 +243,7 @@ function removeFullRows() {
     ) {
       m_level += 1;
       if(disableSounds() === false) {
-        playSound(NES_levelup);
+        audio.playSFX('level_up');
       }
       m_nextTransitionLineCount += 10;
     }
@@ -645,11 +645,7 @@ export function G_MoveCurrentPieceDown() {
 function lockPiece() {
   const lockHeight = m_currentPiece.getHeightFromBottom();
   m_currentPiece.lock();
-  playSoundFromArray(audioIndex, audioArray);
-  audioIndex++;
-  if(audioIndex >= audioArray.length) {
-    audioIndex = 0;
-  }
+  audio.playSFX('piece_drop');
   m_inputManager.onPieceLock();
   m_canvas.drawBoard();
 

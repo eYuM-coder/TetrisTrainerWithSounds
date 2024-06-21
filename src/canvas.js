@@ -12,9 +12,23 @@ import {
   BOARD_WIDTH,
   SquareState,
 } from "./constants.js";
-import { playSound } from "./sounds.js";
+import { Audio } from "./audio.js";
 import { GetLevel, GetCurrentPiece, calcParity } from "./index.js";
+const NES_clearquad = require("../docs/sounds/NES_clearquad.wav");
+const NES_clearline = require("../docs/sounds/NES_clearline.wav");
 const GameSettings = require("./game_settings_manager");
+
+const audio = Audio().getInstance();
+
+async function initAudio() {
+  audio.setSFXVolume(0.5);
+  audio.setMusicVolume(0.5);
+
+  audio.loadSFX('clear_line', 'sounds/NES_clearline.wav');
+  audio.loadSFX('tetris', 'sounds/NES_clearquad.wav');
+}
+
+initAudio();
 
 // Resize the canvas based on the square size
 mainCanvas.setAttribute("height", SQUARE_SIZE * NUM_ROW);
@@ -31,9 +45,9 @@ Canvas.prototype.drawLineClears = function (rowsArray, frameNum) {
   if (disableSounds() === false) {
     if (frameNum <= 1) {
       if(numLinesCleared >= 4) {
-        playSound("./sounds/NES_linefall.mp3");
+        audio.playSFX('tetris');
       } else {
-        playSound("./sounds/NES_clear4.mp3");
+        audio.playSFX('clear_line');
       }
     }
   }
