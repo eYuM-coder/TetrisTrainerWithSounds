@@ -32,6 +32,7 @@ import {
   STANDARD_TAPPER_PRESET,
 } from "./game_settings_presets.js";
 import { PIECE_LOOKUP } from "./tetrominoes.js";
+export let level_up_active = false;
 const GameSettings = require("./game_settings_manager");
 const GameSettingsUi = require("./game_settings_ui_manager");
 const NES_levelup = require("./sounds/NES_levelup.wav");
