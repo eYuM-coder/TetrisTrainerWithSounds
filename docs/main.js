@@ -218,7 +218,7 @@
         /***/
       }),
 
-    /***/ "./sounds/NES_move.wav":
+    /***/ "./docs/sounds/NES_move.wav":
     /*!***********************************!*\
       !*** "./docs/sounds/NES_move.wav" ***!
       \***********************************/
@@ -227,45 +227,45 @@
         /***/
       }),
 
-    /***/ "./src/sounds/NES_clearline.wav":
+    /***/ "./docs/sounds/NES_clearline.wav":
     /*!****************************************!*\
-      !*** "./src/sounds/NES_clearline.wav" ***!
+      !*** "./docs/sounds/NES_clearline.wav" ***!
       \****************************************/
     /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
         eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var sound = \"./sounds/NES_clearline.wav\"\n\n\n\n//# sourceURL=./sounds/NES_clearline.wav?");
         /***/
       }),
 
-    /***/ "./src/sounds/NES_clearquad.wav":
+    /***/ "./docs/sounds/NES_clearquad.wav":
     /*!****************************************!*\
-      !*** "./src/sounds/NES_clearquad.wav" ***!
+      !*** "./docs/sounds/NES_clearquad.wav" ***!
       \****************************************/
     /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
         eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var sound = \"./sounds/NES_clearquad.wav\"\n\n\n\n//# sourceURL=./sounds/NES_clearquad.wav?");
         /***/
       }),
 
-      /***/ "./src/sounds/NES_lock.wav":
+      /***/ "./docs/sounds/NES_lock.wav":
       /*!***********************************!*\
-        !*** "./src/sounds/NES_lock.wav" ***!
+        !*** "./docs/sounds/NES_lock.wav" ***!
         \***********************************/
       /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
         eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var sound = \"./sounds/NES_lock.wav\"\n\n\n\n//# sourceURL=./sounds/NES_lock.wav?");
       }),
 
 
-    /***/ "./src/sounds/NES_levelup.wav":
+    /***/ "./docs/sounds/NES_levelup.wav":
     /*!**************************************!*\
-      !*** "./src/sounds/NES_levelup.wav" ***!
+      !*** "./docs/sounds/NES_levelup.wav" ***!
       \**************************************/
     /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
         eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var sound = \"./sounds/NES_levelup.wav\"\n\n\n\n//# sourceURL=./sounds/NES_levelup.wav?");
         /***/
       }),
 
-      /***/ "./src/sounds/NES_rotate.wav":
+      /***/ "./docs/sounds/NES_rotate.wav":
       /*!*************************************!*\
-        !*** "./src/sounds/NES_rotate.wav" ***!
+        !*** "./docs/sounds/NES_rotate.wav" ***!
         \*************************************/
       /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
         eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var sound = \"./sounds/NES_rotate.wav\"\n\n\n\n//# sourceURL=./sounds/NES_rotate.wav?");
