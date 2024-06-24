@@ -1,5 +1,6 @@
 export function Audio() {
     let instance;
+    let currentSoundSource = null;
 
     function init() {
         let sfxVolume = 0.5;
@@ -32,16 +33,20 @@ export function Audio() {
         async function playSound(audioBuffer, gainNode) {
             if (!audioBuffer) return;
 
+            if(currentSoundSource) {
+                currentSoundSource.stop();
+                currentSoundSource = null;
+            }
+
             let source = context.createBufferSource();
             source.buffer = audioBuffer;
             source.connect(gainNode);
             source.start();
-        }
+            
+            currentSoundSource = source;
 
-        async function loadAndPlay(url, gainNode) {
-            let audioBuffer = await loadSound(url);
-            if (audioBuffer) {
-                playSound(audioBuffer, gainNode);
+            source.onended = () => {
+                currentSoundSource = null;
             }
         }
 
